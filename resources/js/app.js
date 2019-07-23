@@ -8,15 +8,25 @@ require('./bootstrap');
 window.Vue = require('vue');
 
 import VueRouter from 'vue-router';
-Vue.use(VueRouter);
-
 import VueAxios from 'vue-axios';
 import axios from 'axios';
-Vue.use(VueAxios, axios);
-
 import SuiVue from 'semantic-ui-vue';
 import 'semantic-ui-css/semantic.min.css';
+import VueLayers from 'vuelayers';
+import 'vuelayers/lib/style.css'; // needs css-loader
+import App from './components/App'
+
+import Welcome from './components/Welcome'
+import ExampleComponent from './components/ExampleComponent'
+import PlayersIndex from './components/PlayersIndex/PlayersIndex'
+
+Vue.use(VueRouter);
+
+Vue.use(VueAxios, axios);
+
 Vue.use(SuiVue);
+
+Vue.use(VueLayers);
 
 /**
  * The following block of code may be used to automatically register your
@@ -29,12 +39,6 @@ Vue.use(SuiVue);
 const files = require.context('./', true, /\.vue$/i);
 files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default));
 
-
-import App from './components/App'
-
-import Welcome from './components/Welcome'
-import ExampleComponent from './components/ExampleComponent'
-import PlayersIndex from './components/PlayersIndex/PlayersIndex'
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to

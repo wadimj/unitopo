@@ -48,6 +48,7 @@
     export default {
         data() {
             return {
+                loading: false,
                 players: null,
                 meta: null,
                 links: {
@@ -92,6 +93,7 @@
         // when route changes and this component is already rendered,
         // the logic will be slightly different.
         beforeRouteUpdate (to, from, next) {
+            this.loading = true;
             this.players = this.links = this.meta = null
             getUsers(to.query.page, (err, data) => {
                 this.setData(err, data);
@@ -115,6 +117,7 @@
                 });
             },
             setData(err, { data: players, links, meta }) {
+                this.loading = false;
                 if (err) {
                     this.error = err.toString();
                 } else {
@@ -125,5 +128,4 @@
             },
         }
     }
-</script>
 </script>

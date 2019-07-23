@@ -1,6 +1,5 @@
 <?php
 
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -14,12 +13,20 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-/*Route::middleware('auth:api')->get('/user', function (Request $request) {
+/*
+Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
-});*/
+});
+
+Route::get('users/{user}', function (App\Models\User $user) {
+    return $user;
+});
+*/
 
 Route::resource('players', 'Api\PlayerController');
 
-/*Route::get('users/{user}', function (App\Models\User $user) {
-    return $user;
-});*/
+
+Route::fallback(function(){
+    return response()->json([
+        'message' => 'Route not found'], 404);
+});

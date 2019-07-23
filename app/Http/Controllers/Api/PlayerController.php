@@ -4,10 +4,8 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Http\Resources\Player as PlayerResource;
-use App\Http\Resources\PlayerCollection;
 use App\Models\Player;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Validator;
 
 
 class PlayerController extends Controller
@@ -29,10 +27,9 @@ class PlayerController extends Controller
      */
     public function store(Request $request)
     {
-
-        Validator::make($request->all(), [
+        $request->validate([
             'name' => 'required|max:255|unique:players',
-        ])->validate();
+        ]);
 
         $player = Player::create($request->all());
 

@@ -1,10 +1,11 @@
 <template>
     <div>
         <menubar></menubar>
-
-        <sui-container class="main" text>
-            <router-view></router-view>
-        </sui-container>
+        <div class="main">
+            <keep-alive>
+                <router-view></router-view>
+            </keep-alive>
+        </div>
     </div>
 </template>
 
@@ -14,6 +15,6 @@
 
 <style>
     .main{
-        padding-top: 50px;
+        padding-top: 40px;
     }
 </style>
