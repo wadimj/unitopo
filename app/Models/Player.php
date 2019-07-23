@@ -24,6 +24,7 @@ use OwenIt\Auditing\Contracts\Auditable;
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Player whereName($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Player wherePoints($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Player whereUpdatedAt($value)
+ * @property-read \Illuminate\Database\Eloquent\Collection|\OwenIt\Auditing\Models\Audit[] $audits
  */
 class Player extends Model implements Auditable
 {

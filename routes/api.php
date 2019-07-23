@@ -24,6 +24,7 @@ Route::get('users/{user}', function (App\Models\User $user) {
 */
 
 Route::resource('players', 'Api\PlayerController');
+Route::resource('routes', 'Api\RouteController');
 
 
 Route::fallback(function(){
