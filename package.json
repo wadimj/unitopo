@@ -27,6 +27,7 @@
         "semantic-ui-css": "^2.4.1",
         "semantic-ui-vue": "^0.8.1",
         "vue-axios": "^2.1.4",
-        "vue-router": "^3.0.7"
+        "vue-router": "^3.0.7",
+        "vuelayers": "^0.11.4"
     }
 }
