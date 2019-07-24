@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateRoutesTable extends Migration
+class CreateRouteTagsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,15 @@ class CreateRoutesTable extends Migration
      */
     public function up()
     {
-        Schema::create('routes', function (Blueprint $table) {
+        Schema::create('route_tags', function (Blueprint $table) {
             $table->increments('id');
-            $table->text('name');
-            $table->text('description');
-            $table->softDeletes();
+            $table->integer('route_id')->unsigned()->nullable();
+            $table->string('k');
+            $table->string('v');
             $table->timestamps();
+
+            $table->foreign('route_id')->references('id')
+                ->on('routes')->onDelete('cascade');
         });
     }
 
@@ -29,6 +32,6 @@ class CreateRoutesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('routes');
+        Schema::dropIfExists('route_tags');
     }
 }

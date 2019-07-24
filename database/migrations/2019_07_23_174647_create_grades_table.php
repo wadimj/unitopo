@@ -17,6 +17,7 @@ class CreateGradesTable extends Migration
             $table->increments('id');
             $table->integer('scale_id');
             $table->integer('position');
+            $table->softDeletes();
             $table->string('value');
         });
     }

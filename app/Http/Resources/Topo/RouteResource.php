@@ -17,8 +17,8 @@ class RouteResource extends JsonResource
         return [
             'id'         => $this->id,
             'name'       => $this->name,
-            'type'       => $this->type(),
             'grades'     => GradeResource::collection($this->grades),
+            'tags'       => RouteTagResource::collection($this->tags),
             'description'=> $this->description,
             'created_at' => $this->created_at,
             'updated_at' => $this->updated_at,

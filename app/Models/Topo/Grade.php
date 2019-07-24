@@ -3,6 +3,7 @@
 namespace App\Models\Topo;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 /**
  * App\Models\Topo\Grade
@@ -25,6 +26,8 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Grade extends Model
 {
+    use SoftDeletes;
+
     public $timestamps = false;
 
     public function routes()

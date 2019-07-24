@@ -3,6 +3,7 @@
 namespace App\Models\Topo;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use OwenIt\Auditing\Contracts\Auditable;
 
 /**
@@ -28,21 +29,19 @@ use OwenIt\Auditing\Contracts\Auditable;
  */
 class Route extends Model implements Auditable
 {
+    use SoftDeletes;
     use \OwenIt\Auditing\Auditable;
 
     protected $fillable = ['name', 'description', 'type_id'];
+
+    public function tags()
+    {
+       return $this->hasMany(RouteTag::class);
+    }
 
     public function grades()
     {
         return $this->belongsToMany(Grade::class)
             ->withTimestamps();
-    }
-
-    public function type()
-    {
-        return [
-            'id' => 1,
-            'name' => 'Alpine'
-        ];
     }
 }

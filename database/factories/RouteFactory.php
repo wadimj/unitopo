@@ -8,6 +8,5 @@ $factory->define(\App\Models\Topo\Route::class, function (Faker $faker) {
     return [
         'name' => $faker->sentence,
         'description' => $faker->paragraph,
-        'type_id' => random_int(1, 5)
     ];
 });
