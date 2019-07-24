@@ -19,6 +19,7 @@ import App from './components/App'
 import Welcome from './components/Welcome'
 import ExampleComponent from './components/ExampleComponent'
 import PlayersIndex from './components/PlayersIndex/PlayersIndex'
+import RouteIndex from './components/topo/RouteIndex/RouteIndex'
 
 Vue.use(VueRouter);
 
@@ -63,6 +64,11 @@ const router = new VueRouter({
             path: '/players',
             name: 'players.index',
             component: PlayersIndex,
+        },
+        {
+            path: '/routes',
+            name: 'route.index',
+            component: RouteIndex,
         },
     ],
 });

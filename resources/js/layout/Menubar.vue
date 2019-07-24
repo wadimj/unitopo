@@ -6,6 +6,10 @@
                     UNITOPO
                 </router-link>
 
+                <router-link :to="{ name: 'route.index' }" is="sui-menu-item" class="header">
+                    Route Explorer
+                </router-link>
+
                 <router-link :to="{ name: 'hello' }" is="sui-menu-item" class="header">
                     Hello World
                 </router-link>
