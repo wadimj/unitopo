@@ -5,6 +5,7 @@
         <sui-table celled>
             <sui-table-header>
                 <sui-table-row>
+                    <sui-table-header-cell>Region</sui-table-header-cell>
                     <sui-table-header-cell>Name</sui-table-header-cell>
                     <sui-table-header-cell>Grade</sui-table-header-cell>
                     <sui-table-header-cell>Type</sui-table-header-cell>
@@ -13,17 +14,17 @@
             </sui-table-header>
 
             <sui-table-body v-if="loading" class="loading">
-                <sui-table-row colspan="4">
+                <sui-table-row colspan="5">
                     <sui-table-cell>Loading...</sui-table-cell>
                 </sui-table-row>
             </sui-table-body>
 
             <sui-table-body v-if="error" class="error">
                 <sui-table-row>
-                    <sui-table-cell colspan="4">{{ error }}</sui-table-cell>
+                    <sui-table-cell colspan="5">{{ error }}</sui-table-cell>
                 </sui-table-row>
                 <sui-table-row>
-                    <sui-table-cell colspan="4">
+                    <sui-table-cell colspan="5">
                         <button @click.prevent="fetchData">
                             Try Again
                         </button>
@@ -32,7 +33,10 @@
             </sui-table-body>
 
             <sui-table-body v-if="routes">
-                <sui-table-row v-for="{ id, name, grades, tags, description } in routes" :key="id">
+                <sui-table-row v-for="{ id, name, grades, tags, description, regions } in routes" :key="id">
+                    <sui-table-cell>
+                        <region-formatter :regions=regions></region-formatter>
+                    </sui-table-cell>
                     <sui-table-cell>{{ name}}</sui-table-cell>
                     <sui-table-cell>
                         <grade-formatter :grades=grades ></grade-formatter>
@@ -68,6 +72,7 @@
     import axios from 'axios';
     import GradeFormatter from '../GradeFormatter/GradeFormatter'
     import TypeFormatter from '../TypeFormatter/TypeFormatter'
+    import RegionFormatter from '../RegionFormatter/RegionFormatter'
 
     const getRoutes = (page, callback) => {
         const params = { page };
@@ -97,7 +102,7 @@
             };
         },
         components: {
-            GradeFormatter, TypeFormatter
+            GradeFormatter, TypeFormatter, RegionFormatter
         },
         computed: {
             nextPage() {
