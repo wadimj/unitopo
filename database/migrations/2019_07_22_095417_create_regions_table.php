@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateRoutesTable extends Migration
+class CreateRegionsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,16 +13,15 @@ class CreateRoutesTable extends Migration
      */
     public function up()
     {
-        Schema::create('routes', function (Blueprint $table) {
+        Schema::create('regions', function (Blueprint $table) {
             $table->increments('id');
-            $table->text('name');
+            $table->string('type')->default(\App\Models\Topo\Region::TYPE_REGION);
+            $table->string('name');
             $table->text('description')->nullable();
-            $table->integer('region_id')->unsigned()->nullable();
+            $table->string('union_id')->nullable();
+            $table->nestedSet();
             $table->softDeletes();
             $table->timestamps();
-
-            $table->foreign('region_id')->references('id')
-                ->on('regions')->onDelete('cascade');
         });
     }
 
@@ -33,6 +32,6 @@ class CreateRoutesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('routes');
+        Schema::dropIfExists('regions');
     }
 }

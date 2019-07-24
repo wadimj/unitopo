@@ -23,6 +23,13 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Topo\Grade whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Topo\Grade whereValue($value)
  * @mixin \Eloquent
+ * @property \Illuminate\Support\Carbon|null $deleted_at
+ * @method static bool|null forceDelete()
+ * @method static \Illuminate\Database\Query\Builder|\App\Models\Topo\Grade onlyTrashed()
+ * @method static bool|null restore()
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Topo\Grade whereDeletedAt($value)
+ * @method static \Illuminate\Database\Query\Builder|\App\Models\Topo\Grade withTrashed()
+ * @method static \Illuminate\Database\Query\Builder|\App\Models\Topo\Grade withoutTrashed()
  */
 class Grade extends Model
 {
