@@ -7,8 +7,8 @@ import App from './components/App'
 
 import SuiVue from 'semantic-ui-vue';
 import 'semantic-ui-css/semantic.min.css';
-import {store} from './store/store'
-import {router} from './router/router'
+import store from './store/store'
+import router from './router/router'
 
 Vue.use(VueAxios, axios);
 Vue.use(SuiVue);

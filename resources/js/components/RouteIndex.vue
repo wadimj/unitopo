@@ -32,19 +32,23 @@
                 </sui-table-row>
             </sui-table-body>
 
-            <sui-table-body v-if="routes">
-                <sui-table-row v-for="{ id, name, grades, tags, description, regions } in routes" :key="id">
+            <sui-table-body v-if="!loading">
+                <sui-table-row v-for="route in routes" :key="route.id">
                     <sui-table-cell>
-                        <v-region-formatter :regions=regions></v-region-formatter>
-                    </sui-table-cell>
-                    <sui-table-cell>{{ name}}</sui-table-cell>
-                    <sui-table-cell>
-                        <v-grade-formatter :grades=grades ></v-grade-formatter>
+                        <v-region-formatter :regions=route.regions></v-region-formatter>
                     </sui-table-cell>
                     <sui-table-cell>
-                        <v-type-formatter :tags=tags ></v-type-formatter>
+                        <router-link :to="{ name: 'route.view', params: {id: route.id, route: route}}">
+                            {{ route.name }}
+                        </router-link>
                     </sui-table-cell>
-                    <sui-table-cell>{{ description }}</sui-table-cell>
+                    <sui-table-cell>
+                        <v-grade-formatter :grades=route.grades ></v-grade-formatter>
+                    </sui-table-cell>
+                    <sui-table-cell>
+                        <v-type-formatter :tags=route.tags ></v-type-formatter>
+                    </sui-table-cell>
+                    <sui-table-cell>{{ route.description }}</sui-table-cell>
                 </sui-table-row>
             </sui-table-body>
 
@@ -69,20 +73,22 @@
 </template>
 
 <script>
-    import axios from 'axios';
+    import store from '../store/store';
+    import {mapState} from 'vuex';
+
     import VGradeFormatter from './topo/VGradeFormatter'
     import VTypeFormatter from './topo/VTypeFormatter'
     import VRegionFormatter from './topo/VRegionFormatter'
 
-    const getRoutes = (page, callback) => {
+    const getRoutes = (page = null) => {
         const params = { page };
 
-        axios
-            .get('/api/routes', { params })
-            .then(response => {
-                callback(null, response.data);
-            }).catch(error => {
-            callback(error, error.response.data);
+        store.dispatch('getRoutes', params).then(() => {
+            this.loading = false;
+        }).catch(error => {
+            if (error.response) {
+                this.error = error.toString();
+            }
         });
     };
 
@@ -90,21 +96,55 @@
         data() {
             return {
                 loading: false,
-                routes: null,
-                meta: null,
-                links: {
-                    first: null,
-                    last: null,
-                    next: null,
-                    prev: null,
-                },
                 error: null,
             };
         },
         components: {
             VGradeFormatter, VTypeFormatter, VRegionFormatter
         },
+        beforeRouteEnter (to, from, next) {
+            getRoutes(to.query.page);
+            next();
+        },
+        beforeRouteUpdate (to, from, next) {
+            this.loading = true;
+            getRoutes(to.query.page);
+            this.loading = false;
+            next();
+        },
+        methods: {
+            goToNext() {
+                this.$router.push({
+                    query: {
+                        page: this.nextPage,
+                    },
+                });
+            },
+            goToPrev() {
+                this.$router.push({
+                    name: 'route.index',
+                    query: {
+                        page: this.prevPage,
+                    }
+                });
+            },
+            /*setData(err, { data: routes, links, meta }) {
+                this.loading = false;
+                if (err) {
+                    this.error = err.toString();
+                } else {
+                    this.routes = routes;
+                    this.links = links;
+                    this.meta = meta;
+                }
+            },*/
+        },
         computed: {
+            ...mapState({
+                routes: state => state.routes.routes,
+                meta: state => state.routes.meta,
+                links: state => state.routes.links,
+            }),
             nextPage() {
                 if (! this.meta || this.meta.current_page === this.meta.last_page) {
                     return;
@@ -125,49 +165,8 @@
                 }
 
                 const { current_page, last_page } = this.meta;
-
                 return `${current_page} of ${last_page}`;
             },
         },
-        beforeRouteEnter (to, from, next) {
-            getRoutes(to.query.page, (err, data) => {
-                next(vm => vm.setData(err, data));
-            });
-        },
-        beforeRouteUpdate (to, from, next) {
-            this.loading = true;
-            this.routes = this.links = this.meta = null
-            getRoutes(to.query.page, (err, data) => {
-                this.setData(err, data);
-                next();
-            });
-        },
-        methods: {
-            goToNext() {
-                this.$router.push({
-                    query: {
-                        page: this.nextPage,
-                    },
-                });
-            },
-            goToPrev() {
-                this.$router.push({
-                    name: 'route.index',
-                    query: {
-                        page: this.prevPage,
-                    }
-                });
-            },
-            setData(err, { data: routes, links, meta }) {
-                this.loading = false;
-                if (err) {
-                    this.error = err.toString();
-                } else {
-                    this.routes = routes;
-                    this.links = links;
-                    this.meta = meta;
-                }
-            },
-        }
     }
 </script>

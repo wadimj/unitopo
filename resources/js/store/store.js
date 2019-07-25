@@ -1,18 +1,12 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
+import routes from './routeStore';
 
 Vue.use(Vuex);
 
-export const store = new Vuex.Store({
-    state: {
-        flavor: ''
+export default new Vuex.Store({
+    strict: true,
+    modules: {
+        routes,
     },
-    mutations: {
-        change(state, flavor) {
-            state.flavor = flavor
-        }
-    },
-    getters: {
-        flavor: state => state.flavor
-    }
 });

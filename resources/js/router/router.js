@@ -3,10 +3,11 @@ import VueRouter from 'vue-router';
 import HomeMap from "../components/HomeMap";
 import ExampleComponent from "../components/ExampleComponent";
 import RouteIndex from "../components/RouteIndex";
+import RouteView from "../components/topo/RouteView";
 
 Vue.use(VueRouter);
 
-export const router = new VueRouter({
+export default new VueRouter({
     mode: 'history',
     routes: [
         {
@@ -24,5 +25,11 @@ export const router = new VueRouter({
             name: 'route.index',
             component: RouteIndex,
         },
+        {
+            path: '/routes/:id',
+            name: 'route.view',
+            component: RouteView,
+            props: true
+        }
     ],
 });

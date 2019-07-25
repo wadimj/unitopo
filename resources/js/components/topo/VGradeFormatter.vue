@@ -8,12 +8,9 @@
 
 <script>
     export default {
-        props: ['grades'],
-        data() {
-            return {
-                grades: null
-            };
-        },
+        props: {
+            grades: Array
+        }
     };
 </script>
 
