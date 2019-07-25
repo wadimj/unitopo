@@ -1,6 +1,6 @@
 <template>
     <div>
-        <menubar></menubar>
+        <the-menubar></the-menubar>
         <div class="main">
             <keep-alive>
                 <router-view></router-view>
@@ -10,10 +10,16 @@
 </template>
 
 <script>
-    export default {}
+    import TheMenubar from './TheMenubar'
+
+    export default {
+        components: {
+            TheMenubar,
+        }
+    }
 </script>
 
-<style>
+<style scoped>
     .main{
         padding-top: 40px;
     }
