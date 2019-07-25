@@ -2,6 +2,7 @@
 
 namespace App\Models\Topo;
 
+use App\Models\Content\Article;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use OwenIt\Auditing\Contracts\Auditable;
@@ -57,5 +58,10 @@ class Route extends Model implements Auditable
     public function region()
     {
         return $this->belongsTo(Region::class);
+    }
+
+    public function articles()
+    {
+        return $this->morphMany(Article::class, 'descriptionable');
     }
 }
