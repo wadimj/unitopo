@@ -2,6 +2,9 @@ export default {
     getRoutes(params = null) {
         return axios.get('/api/routes', { params });
     },
+    getFullRoute(id) {
+        return axios.get('/api/routes/' + id);
+    },
     /*createTask(text) {
         return axios.post('/api/user/task', {text}, {
             headers: {'Authorization': 'Bearer ' + auth.getToken()}

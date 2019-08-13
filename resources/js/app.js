@@ -10,6 +10,8 @@ import 'semantic-ui-css/semantic.min.css';
 import store from './store/store'
 import router from './router/router'
 
+import 'nprogress/nprogress.css'
+
 Vue.use(VueAxios, axios);
 Vue.use(SuiVue);
 

@@ -80,15 +80,13 @@
     import VTypeFormatter from './topo/VTypeFormatter'
     import VRegionFormatter from './topo/VRegionFormatter'
 
-    const getRoutes = (page = null) => {
+    const getRoutes = (page, callback) => {
         const params = { page };
 
         store.dispatch('getRoutes', params).then(() => {
-            this.loading = false;
+            //callback(null);
         }).catch(error => {
-            if (error.response) {
-                this.error = error.toString();
-            }
+            //callback(error);
         });
     };
 
@@ -128,16 +126,12 @@
                     }
                 });
             },
-            /*setData(err, { data: routes, links, meta }) {
+            setData(err) {
                 this.loading = false;
                 if (err) {
                     this.error = err.toString();
-                } else {
-                    this.routes = routes;
-                    this.links = links;
-                    this.meta = meta;
                 }
-            },*/
+            },
         },
         computed: {
             ...mapState({

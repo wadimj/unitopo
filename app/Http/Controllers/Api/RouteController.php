@@ -16,7 +16,7 @@ class RouteController extends Controller
      */
     public function index()
     {
-        return RouteResource::collection(Route::paginate(10));
+        return RouteResource::collection(Route::with(['grades', 'region', 'tags'])->paginate(10));
     }
 
     /**
@@ -38,7 +38,7 @@ class RouteController extends Controller
      */
     public function show(Route $route)
     {
-        return new RouteResource(Route::findOrFail($route));
+        return new RouteResource($route);
     }
 
     /**
