@@ -75,39 +75,20 @@
 <script>
     import store from '../store/store';
     import {mapState} from 'vuex';
-
     import VGradeFormatter from './topo/VGradeFormatter'
     import VTypeFormatter from './topo/VTypeFormatter'
     import VRegionFormatter from './topo/VRegionFormatter'
 
-    const getRoutes = (page, callback) => {
-        const params = { page };
-
-        store.dispatch('getRoutes', params).then(() => {
-            //callback(null);
-        }).catch(error => {
-            //callback(error);
-        });
-    };
-
     export default {
-        data() {
-            return {
-                loading: false,
-                error: null,
-            };
-        },
         components: {
             VGradeFormatter, VTypeFormatter, VRegionFormatter
         },
         beforeRouteEnter (to, from, next) {
-            getRoutes(to.query.page);
+            store.dispatch('routes/getRoutes', to.query.page);
             next();
         },
         beforeRouteUpdate (to, from, next) {
-            this.loading = true;
-            getRoutes(to.query.page);
-            this.loading = false;
+            store.dispatch('routes/getRoutes', to.query.page);
             next();
         },
         methods: {
@@ -126,18 +107,14 @@
                     }
                 });
             },
-            setData(err) {
-                this.loading = false;
-                if (err) {
-                    this.error = err.toString();
-                }
-            },
         },
         computed: {
             ...mapState({
                 routes: state => state.routes.routes,
                 meta: state => state.routes.meta,
                 links: state => state.routes.links,
+                loading: state => state.loader.loading,
+                error: state => state.loader.error,
             }),
             nextPage() {
                 if (! this.meta || this.meta.current_page === this.meta.last_page) {

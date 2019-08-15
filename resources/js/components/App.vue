@@ -5,7 +5,7 @@
             <keep-alive include="route.index">
                 <router-view v-if="!error"></router-view>
             </keep-alive>
-            <not-found v-if="error.status == 404"></not-found>
+            <not-found v-if="error && error.status == 404"></not-found>
         </div>
     </div>
 </template>

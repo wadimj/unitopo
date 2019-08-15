@@ -9,14 +9,14 @@ export default {
         activeRoute: null
     },
     mutations: {
-        setRoutes(state, routes){
+        SET_ROUTES(state, routes){
             state.routes = routes;
         },
-        setMeta(state, response){
+        SET_META(state, response){
             state.meta = response.meta;
             state.links = response.links;
         },
-        setActiveRoute(state, route){
+        SET_ACTIVE_ROUTE(state, route){
             state.activeRoute = route
         },
     },
@@ -25,8 +25,8 @@ export default {
             store.commit('loader/START_LOADING');
             return new Promise((resolve, reject) => {
                 routesApi.getRoutes(params).then(response => {
-                    commit('setRoutes', response.data.data);
-                    commit('setMeta', response.data);
+                    commit('SET_ROUTES', response.data.data);
+                    commit('SET_META', response.data);
                     store.commit('loader/FINISH_LOADING');
                     resolve(response);
                 }).catch(error => {
@@ -38,7 +38,7 @@ export default {
             store.commit('loader/START_LOADING');
             return new Promise((resolve, reject) => {
                 routesApi.getFullRoute(id).then(response => {
-                    commit('setActiveRoute', response.data.data);
+                    commit('SET_ACTIVE_ROUTE', response.data.data);
                     store.commit('loader/FINISH_LOADING');
                     resolve(response);
                 }).catch(error => {
@@ -56,5 +56,6 @@ export default {
         getActiveRoute(state) {
             return state.activeRoute;
         }
-    }
+    },
+    namespaced: true
 };

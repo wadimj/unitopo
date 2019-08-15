@@ -55,7 +55,7 @@
             VGradeFormatter, VTypeFormatter, VRegionFormatter
         },
         beforeRouteEnter (to, from, next) {
-            store.dispatch("getFullRoute", to.params.id)
+            store.dispatch("routes/getFullRoute", to.params.id)
                 .catch(error => {
                 if (error.response) {
                     this.checkResponse(error.response.status);
