@@ -30,8 +30,7 @@ export default {
                     store.commit('loader/FINISH_LOADING');
                     resolve(response);
                 }).catch(error => {
-                    reject(error);
-                    store.commit('loader/FINISH_LOADING');
+                    store.commit('loader/SET_ERROR', error);
                 })
             });
         },
@@ -43,8 +42,7 @@ export default {
                     store.commit('loader/FINISH_LOADING');
                     resolve(response);
                 }).catch(error => {
-                    reject(error);
-                    store.commit('loader/FINISH_LOADING');
+                    store.commit('loader/SET_ERROR', error.response);
                 })
             });
         }

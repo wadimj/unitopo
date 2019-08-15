@@ -4,6 +4,7 @@ import HomeMap from "../components/HomeMap";
 import ExampleComponent from "../components/ExampleComponent";
 import RouteIndex from "../components/RouteIndex";
 import RouteView from "../components/topo/RouteView";
+import NotFound from "../components/errors/NotFound"
 
 Vue.use(VueRouter);
 
@@ -30,6 +31,10 @@ export default new VueRouter({
             name: 'route.view',
             component: RouteView,
             props: true
+        },
+        {
+            path: '*',
+            component: NotFound
         }
     ],
 });
