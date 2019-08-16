@@ -13,3 +13,12 @@ yarn-error.log
 .idea/*
 /public/fonts/vendor/*
 /public/images/vendor/*
+/public/js/*
+/public/css/*
+/public/fonts/*
+
+resources/semantic/dist/components
+resources/semantic/dist/themes/*
+!resources/semantic/dist/*.js
+!resources/semantic/dist/*.css
+!resources/semantic/dist/themes/default/
