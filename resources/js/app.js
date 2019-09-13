@@ -22,4 +22,9 @@ const app = new Vue({
     },
     store,
     router,
+    mounted() {
+        $(function () {
+            $('[data-toggle="tooltip"]').tooltip();
+        });
+    },
 });

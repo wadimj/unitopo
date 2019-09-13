@@ -34,7 +34,7 @@
         }
     }
 </script>
-<style scoped>
+<style>
     .not-found{
         height: 100vh;
         margin-top: -40px;

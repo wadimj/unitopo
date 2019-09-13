@@ -11,5 +11,7 @@ const mix = require('laravel-mix');
  |
  */
 
+mix.options({ extractVueStyles: true });
+
 mix.js('resources/js/app.js', 'public/js').sourceMaps()
     .sass('resources/sass/app.scss', 'public/css');

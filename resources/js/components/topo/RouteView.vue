@@ -3,12 +3,32 @@
         <header class="py-5 bg-image-full" style="background-image: url('/images/sections/msw_1.jpg');">
         </header>
 
-       <sui-container text class="ui raised very padded text container segment" v-if="!loading">
-            <h1 is="sui-header">{{ route.name }}</h1>
-            <div class="ui divider"></div>
-            <v-grade-formatter :grades=route.grades ></v-grade-formatter>
-            <v-type-formatter :tags=route.tags ></v-type-formatter>
-            <p>
+       <sui-container text class="ui raised very padded text container segment">
+
+           <h1 is="sui-header" class="ui placeholder header" v-if="loading">
+               <div class="line"></div>
+               <div class="line"></div>
+               <div class="line"></div>
+           </h1>
+           <h1 is="sui-header" v-if="!loading">{{ route.name }}</h1>
+           <i v-if="!loading">{{ route.description }}</i>
+
+           <div class="ui divider"></div>
+
+           <div v-if="!loading" class="tag-info">
+                <v-region-formatter :regions=route.regions ></v-region-formatter>
+                <v-grade-formatter :grades=route.grades ></v-grade-formatter>
+                <v-type-formatter :tags=route.tags v-bind:all-tags="true"></v-type-formatter>
+           </div>
+           <div class="ui placeholder" v-if="loading">
+               <sui-label>&nbsp;</sui-label>
+               <sui-label>&nbsp;</sui-label>
+               <sui-label>&nbsp;</sui-label>
+           </div>
+
+           <div class="ui divider"></div>
+
+           <p>
                 Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo
                 ligula eget dolor. Aenean massa <b>strong</b>. Cum sociis natoque penatibus
                 et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis,
@@ -78,5 +98,14 @@
         background-position: center;
         overflow: hidden;
         min-height: 15vh;
+    }
+    .GradeFormatter, .TypeFormatter, .RegionFormatter{
+        display: inline-block;
+    }
+    .RegionFormatter{
+        font-weight: bold;
+    }
+    .tag-info{
+        line-height: 2em;
     }
 </style>
