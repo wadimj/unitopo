@@ -21,7 +21,7 @@ class Article extends Model
      *
      * @return \Illuminate\Database\Eloquent\Relations\MorphTo
      */
-    public function descriptionable(){
+    public function section(){
         return $this->morphTo();
     }
 }

@@ -62,6 +62,6 @@ class Route extends Model implements Auditable
 
     public function articles()
     {
-        return $this->morphMany(Article::class, 'descriptionable');
+        return $this->morphMany(Article::class, 'section');
     }
 }

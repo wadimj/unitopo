@@ -141,3 +141,9 @@
         },
     }
 </script>
+
+<style>
+    .grade-label{
+        display: inline-flex !important;
+    }
+</style>

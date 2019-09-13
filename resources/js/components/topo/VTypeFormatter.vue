@@ -2,6 +2,7 @@
     <div class="TypeFormatter">
         <sui-label v-for="type in types" :color="type.color" :key="type.k"
                    data-toggle="tooltip" :title="type.k">
+            <i :class="type.icon + ' icon'"></i>
             {{ type.v }}
         </sui-label>
     </div>
@@ -24,6 +25,7 @@
                     rObj.k = obj.k;
                     rObj.v = obj.v;
                     rObj.color = (obj.k === 'type') ? 'red' : 'green';
+                    rObj.icon = (obj.k === 'type') ? 'cube' : 'tag';
                     return rObj;
                 });
             }
