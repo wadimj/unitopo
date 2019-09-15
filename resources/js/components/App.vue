@@ -1,6 +1,7 @@
 <template>
     <div class="app">
         <the-menubar></the-menubar>
+        <the-filter-sidebar></the-filter-sidebar>
         <div class="main">
             <keep-alive include="route.index">
                 <router-view v-if="!error"></router-view>
@@ -12,6 +13,7 @@
 
 <script>
     import TheMenubar from './TheMenubar'
+    import TheFilterSidebar from './TheFilterSidebar'
     import store from '../store/store';
     import {mapState} from 'vuex';
     import NProgress from 'nprogress/nprogress';
@@ -31,6 +33,7 @@
     export default {
         components: {
             TheMenubar,
+            TheFilterSidebar,
             NotFound
         },
         computed: {

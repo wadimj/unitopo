@@ -4,6 +4,7 @@ import HomeMap from "../components/HomeMap";
 import ExampleComponent from "../components/ExampleComponent";
 import RouteIndex from "../components/RouteIndex";
 import RouteView from "../components/topo/RouteView";
+import TestDraggable from "../components/TestDraggable"
 import NotFound from "../components/errors/NotFound"
 
 Vue.use(VueRouter);
@@ -31,6 +32,11 @@ export default new VueRouter({
             name: 'route.view',
             component: RouteView,
             props: true
+        },
+        {
+            path: '/drag',
+            name: 'route.drag',
+            component: TestDraggable,
         },
         {
             path: '*',

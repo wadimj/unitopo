@@ -1,6 +1,15 @@
+<!--suppress ALL -->
 <template>
-    <div>
+    <div class="TheMenuBar">
         <sui-menu fixed inverted>
+            <sui-menu-menu position="left">
+                <a
+                    is="sui-menu-item"
+                    content="Filters"
+                    @click="toggleFilters()"
+                />
+            </sui-menu-menu>
+
             <sui-container>
                 <router-link :to="{ name: 'home' }" is="sui-menu-item" class="header">
                     UNITOPO
@@ -14,7 +23,7 @@
                     Hello World
                 </router-link>
 
-                <a is="sui-menu-item" href="#">Home</a>
+                <router-link is="sui-menu-item" :to="{ name: 'route.drag' }" >Drag</router-link>
 
                 <sui-dropdown text="Dropdown" item class="simple">
                     <sui-dropdown-menu>
@@ -36,10 +45,29 @@
                         <a is="sui-dropdown-item" href="#">Link Item</a>
                     </sui-dropdown-menu>
                 </sui-dropdown>
+
             </sui-container>
+
+            <sui-menu-menu position="right">
+                <sui-menu-item right>
+                    <sui-input transparent icon="search" placeholder="Search..." />
+                </sui-menu-item>
+            </sui-menu-menu>
         </sui-menu>
     </div>
 </template>
 <script>
-    export default {}
+    export default {
+        methods: {
+            toggleFilters() {
+                $('#filterSidebar')
+                    .sidebar('toggle');
+            },
+        },
+    }
 </script>
+<style>
+    .TheMenuBar{
+        z-index: 200;
+    }
+</style>

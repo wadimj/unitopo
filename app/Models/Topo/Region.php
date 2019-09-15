@@ -67,4 +67,11 @@ class Region extends Model
     {
         return $this->hasMany(Route::class);
     }
+
+    public function allDescendantRoutes()
+    {
+        $regions = $this->descendants()->pluck('id');
+        $regions[] = $this->getKey();
+        return Route::whereIn('region_id', $regions)->get();
+    }
 }
