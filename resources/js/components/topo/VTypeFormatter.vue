@@ -1,16 +1,27 @@
 <template>
     <div class="TypeFormatter">
-        <sui-label v-for="type in types" :color="type.color" :key="type.k"
-                   data-toggle="tooltip" :title="type.k">
-            <i :class="type.icon + ' icon'"></i>
-            {{ type.v }}
-        </sui-label>
+        <draggable :group="{ name: 'types', pull: 'clone', put: false }"
+                   :sort="false"
+                   @end="end"
+                   :clone="cloneType"
+                   ghost-class="ghost"
+                   :list="types"
+        >
+            <type v-for="type in types" :type="type" :key="type.k"/>
+        </draggable>
     </div>
 </template>
 
 <script>
+    import draggable from "../../libraries/vuedraggable.umd"
+    import type from "./VType"
+
     export default {
         props: ['tags', 'allTags'],
+        components: {
+            draggable,
+            type
+        },
         computed: {
             types () {
                 let retTags;
@@ -30,6 +41,17 @@
                 });
             }
         },
+        methods: {
+            end: function(evt) {
+                window.console.log("VTYPEF");
+                window.console.log(evt);
+            },
+            cloneType(obj) {
+                window.console.log("CLONE");
+                window.console.log(obj);
+                return obj;
+            }
+        }
     };
 </script>
 
