@@ -55,8 +55,11 @@
     };
 </script>
 
-<style>
+<style scoped>
     .TypeFormatter{
         display: flex;
+    }
+    .ui.label{
+        cursor: grab;
     }
 </style>

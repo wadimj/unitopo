@@ -5,11 +5,11 @@
             <draggable
                 class="dragArea ui attached segment"
                 group="types"
-                :list="list1"
+                v-model="elements"
                 @add="add"
                 @change="log"
             >
-                <type v-for="type in list1" :type="type" :key="type.k" :delete-btn="true" v-on:delete="removeTag"/>
+                <type v-for="type in elements" :type="type" :key="type.k" :delete-btn="true" v-on:delete="removeTag"/>
             </draggable>
 
             <h4 class="ui top attached header">Grades</h4>
@@ -28,9 +28,9 @@
         </div>
 </template>
 <script>
-    import draggable from "../libraries/vuedraggable.umd"
-    import {mapState} from 'vuex';
-    import type from "./topo/VType"
+    import store from '../store/store';
+    import draggable from "../libraries/vuedraggable.umd";
+    import type from "./topo/VType";
 
     export default {
         components: {
@@ -38,14 +38,14 @@
             type
         },
         computed: {
-            ...mapState({
-                elements: state => state.filters.elements,
-            }),
-        },
-        data() {
-            return {
-                list1: [{"k":"type","v":"alpine","color":"red","icon":"cube"},{"k":"suscipit","v":"iusto","color":"green","icon":"tag"},{"k":"natus","v":"aut","color":"green","icon":"tag"}]
-            };
+            elements: {
+                get() {
+                    return store.state.filters.elements;
+                },
+                set(value) {
+                    store.dispatch('filters/updateElements', value);
+                }
+            }
         },
         mounted() {
             $('#filterSidebar')
@@ -64,17 +64,11 @@
             log: function(evt) {
                 window.console.log("LOG");
                 window.console.log(evt);
-
-                if(evt.)
             },
             removeTag(key) {
                 console.log("DELETE");
                 console.log(key);
-                this.list1.find(function(element, index, array){
-                    if(typeof element !== 'undefined' && element.k === key){
-                        delete array.splice(index, 1);
-                    }
-                });
+                store.dispatch('filters/removeElement', key);
 
                 $('[data-toggle="tooltip"]').tooltip('hide');
             },
