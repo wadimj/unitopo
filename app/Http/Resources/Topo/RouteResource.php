@@ -20,7 +20,7 @@ class RouteResource extends JsonResource
             'id'         => $this->id,
             'name'       => $this->name,
             'grades'     => GradeResource::collection($this->grades),
-            'tags'       => RouteTagResource::collection($this->tags),
+            'tags'       => TagResource::collection($this->tags),
             'regions'    => RegionResource::collection(Region::defaultOrder()->ancestorsAndSelf($this->region_id)),
             'description'=> $this->description,
             'articles'   => ArticleResource::collection($this->articles),

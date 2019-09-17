@@ -4,7 +4,7 @@
 
 use Faker\Generator as Faker;
 
-$factory->define(\App\Models\Topo\RouteTag::class, function (Faker $faker) {
+$factory->define(\App\Models\Topo\Tag::class, function (Faker $faker) {
     return [
         'k' => $faker->word,
         'v' => $faker->word

@@ -29,7 +29,7 @@ use OwenIt\Auditing\Contracts\Auditable;
  * @mixin \Eloquent
  * @property \Illuminate\Support\Carbon|null $deleted_at
  * @property-read \Illuminate\Database\Eloquent\Collection|\OwenIt\Auditing\Models\Audit[] $audits
- * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Topo\RouteTag[] $tags
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Topo\Tag[] $tags
  * @method static bool|null forceDelete()
  * @method static \Illuminate\Database\Query\Builder|\App\Models\Topo\Route onlyTrashed()
  * @method static bool|null restore()
@@ -46,7 +46,8 @@ class Route extends Model implements Auditable
 
     public function tags()
     {
-       return $this->hasMany(RouteTag::class);
+       return $this->belongsToMany(Tag::class)
+           ->withTimestamps();
     }
 
     public function grades()

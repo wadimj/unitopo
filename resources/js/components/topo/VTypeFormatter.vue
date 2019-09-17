@@ -35,8 +35,34 @@
                     var rObj = {};
                     rObj.k = obj.k;
                     rObj.v = obj.v;
-                    rObj.color = (obj.k === 'type') ? 'red' : 'green';
-                    rObj.icon = (obj.k === 'type') ? 'cube' : 'tag';
+                    rObj.dsc = obj.dsc;
+
+                    switch (rObj.k) {
+                        case 'type':
+                            rObj.icon = 'cube';
+                            rObj.color = 'purple';
+                            break;
+                        case 'length':
+                            rObj.icon = 'arrow circle up';
+                            rObj.color = 'orange';
+                            rObj.v = obj.v + ' m';
+                            break;
+                        case 'loose':
+                            rObj.icon = 'cubes';
+                            rObj.color = 'red';
+                            rObj.v = '';
+                            break;
+                        case 'top-pick':
+                            rObj.icon = 'star';
+                            rObj.color = 'yellow';
+                            rObj.v = '';
+                            break;
+                        default:
+                            rObj.icon = 'tag';
+                            rObj.color = 'green';
+                            break;
+                    }
+
                     return rObj;
                 });
             }
