@@ -9,14 +9,7 @@
                 @add="add"
                 @change="log"
             >
-                <type v-for="type in elements" :type="type" :key="type.k" :delete-btn="true" v-on:delete="removeTag"/>
-            </draggable>
-
-            <h4 class="ui top attached header">Grades</h4>
-            <draggable
-                class="dragArea ui attached segment"
-                group="grades"
-            >
+                <type v-for="type in elements" :type="type" :key="type.id" :delete-btn="true" v-on:delete="removeTag"/>
             </draggable>
 
             <h4 class="ui top attached header">Regions</h4>

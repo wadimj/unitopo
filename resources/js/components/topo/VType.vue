@@ -3,7 +3,8 @@
                data-toggle="tooltip" :title="type.dsc" class="route-tag">
         <i :class="type.icon + ' icon'"></i>
         {{ type.v }}
-        <i v-if="deleteBtn" class="close icon" :data-index="type.k" data-role="remove-filter" v-on:click="deleteTag"></i>
+        <i v-if="deleteBtn" class="close icon"
+           :data-index="type.k" data-role="remove-filter" v-on:click="deleteTag"></i>
     </sui-label>
 </template>
 

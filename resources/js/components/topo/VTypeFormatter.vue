@@ -2,12 +2,11 @@
     <div class="TypeFormatter">
         <draggable :group="{ name: 'types', pull: 'clone', put: false }"
                    :sort="false"
-                   @end="end"
                    :clone="cloneType"
                    ghost-class="ghost"
                    :list="types"
         >
-            <type v-for="type in types" :type="type" :key="type.k"/>
+            <type v-for="type in types" :type="type" :key="type.id"/>
         </draggable>
     </div>
 </template>
@@ -33,9 +32,11 @@
 
                 return retTags.map(obj => {
                     var rObj = {};
+                    rObj.id = obj.id;
                     rObj.k = obj.k;
                     rObj.v = obj.v;
                     rObj.dsc = obj.dsc;
+                    rObj.duplicate = obj.duplicate;
 
                     switch (rObj.k) {
                         case 'type':
@@ -68,10 +69,6 @@
             }
         },
         methods: {
-            end: function(evt) {
-                window.console.log("VTYPEF");
-                window.console.log(evt);
-            },
             cloneType(obj) {
                 window.console.log("CLONE");
                 window.console.log(obj);

@@ -2,9 +2,7 @@ export default {
     namespaced: true,
     state: {
         elements: [
-            {"k":"type","v":"alpine","color":"red","icon":"cube"},
-            {"k":"suscipit","v":"iusto","color":"green","icon":"tag"},
-            {"k":"natus","v":"aut","color":"green","icon":"tag"}
+
         ]
     },
     mutations: {
@@ -15,7 +13,7 @@ export default {
                     return;
                 }
 
-                let key = element.k;
+                let key = element.duplicate;
                 let currIndex = index;
 
                 payload.find(function(element, index, array){
@@ -23,7 +21,7 @@ export default {
                         return;
                     }
 
-                    if(element.k === key && index !== currIndex){
+                    if(element.duplicate === key && index !== currIndex){
                         array.splice(index, 1);
                         //todo notify about duplicate
                     }

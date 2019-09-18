@@ -62,4 +62,14 @@ class Tag extends Model
                 return $this->k;
         }
     }
+
+    public function getDuplicateCriteria()
+    {
+        switch ($this->k){
+            case TagKey::TYPE:
+                return $this->k . '-' . $this->v;
+            default:
+                return $this->k;
+        }
+    }
 }

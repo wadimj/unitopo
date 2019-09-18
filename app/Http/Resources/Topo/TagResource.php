@@ -17,9 +17,11 @@ class TagResource extends JsonResource
     {
         /** @var Tag $this */
         return [
+            'id' => $this->id,
             'k' => $this->k,
             'v' => $this->v,
-            'dsc' => $this->getTagName()
+            'dsc' => $this->getTagName(),
+            'duplicate' => $this->getDuplicateCriteria()
         ];
     }
 }
