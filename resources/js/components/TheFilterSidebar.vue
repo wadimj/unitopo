@@ -1,22 +1,26 @@
 <!--suppress ALL -->
 <template>
         <div class="ui sidebar vertical menu" id="filterSidebar">
-            <h4 class="ui top attached header">Types</h4>
+            <h4 class="ui top attached header">Tags</h4>
             <draggable
                 class="dragArea ui attached segment"
                 group="types"
-                v-model="elements"
+                v-model="tags"
                 @add="add"
                 @change="log"
             >
-                <type v-for="type in elements" :type="type" :key="type.id" :delete-btn="true" v-on:delete="removeTag"/>
+                <type v-for="tag in tags" :type="tag" :key="tag.id" :delete-btn="true" v-on:delete="removeTag"/>
             </draggable>
 
             <h4 class="ui top attached header">Regions</h4>
             <draggable
                 class="dragArea ui attached segment"
                 group="regions"
+                v-model="regions"
+                @add="add"
+                @change="log"
             >
+                <region v-for="region in regions" :region="region" :key="region.id" :filter-mode="true"/>
             </draggable>
         </div>
 </template>
@@ -24,20 +28,30 @@
     import store from '../store/store';
     import draggable from "../libraries/vuedraggable.umd";
     import type from "./topo/VType";
+    import region from "./topo/VRegion";
 
     export default {
         components: {
             draggable,
-            type
+            type,
+            region
         },
         computed: {
-            elements: {
+            tags: {
                 get() {
-                    return store.state.filters.elements;
+                    return store.state.filters.tags;
                 },
                 set(value) {
-                    store.dispatch('filters/updateElements', value);
-                }
+                    store.dispatch('filters/updateTags', value);
+                },
+            },
+            regions: {
+                get() {
+                    return store.state.filters.regions;
+                },
+                set(value) {
+                    store.dispatch('filters/updateRegions', value);
+                },
             }
         },
         mounted() {
@@ -61,7 +75,7 @@
             removeTag(key) {
                 console.log("DELETE");
                 console.log(key);
-                store.dispatch('filters/removeElement', key);
+                store.dispatch('filters/removeTag', key);
 
                 $('[data-toggle="tooltip"]').tooltip('hide');
             },

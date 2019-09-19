@@ -1,12 +1,11 @@
 export default {
     namespaced: true,
     state: {
-        elements: [
-
-        ]
+        tags: [],
+        regions: [],
     },
     mutations: {
-        UPDATE_ELEMENTS: (state, payload) => {
+        UPDATE_TAGS: (state, payload) => {
             //Remove duplicates
             payload.find(function(element, index, array){
                 if(typeof element === 'undefined'){
@@ -28,10 +27,20 @@ export default {
                 });
             });
 
-            state.elements = payload;
+            state.tags = payload;
         },
-        REMOVE_ELEMENT: (state, key) => {
-            state.elements.find(function(element, index, array){
+        REMOVE_TAG: (state, key) => {
+            state.tags.find(function(element, index, array){
+                if(typeof element !== 'undefined' && element.k === key){
+                    array.splice(index, 1);
+                }
+            });
+        },
+        UPDATE_REGIONS: (state, payload) => {
+            state.regions = payload;
+        },
+        REMOVE_REGION: (state, key) => {
+            state.regions.find(function(element, index, array){
                 if(typeof element !== 'undefined' && element.k === key){
                     array.splice(index, 1);
                 }
@@ -39,11 +48,17 @@ export default {
         },
     },
     actions: {
-        updateElements: ({ commit }, payload) => {
-            commit("UPDATE_ELEMENTS", payload);
+        updateTags: ({ commit }, payload) => {
+            commit("UPDATE_TAGS", payload);
         },
-        removeElement: ({ commit }, key) => {
-            commit("REMOVE_ELEMENT", key);
+        removeTag: ({ commit }, key) => {
+            commit("REMOVE_TAG", key);
+        },
+        updateRegions: ({ commit }, payload) => {
+            commit("UPDATE_REGIONS", payload);
+        },
+        removeRegion: ({ commit }, key) => {
+            commit("REMOVE_REGION", key);
         },
     },
     getters: {

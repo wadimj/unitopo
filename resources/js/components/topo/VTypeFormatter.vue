@@ -3,7 +3,6 @@
         <draggable :group="{ name: 'types', pull: 'clone', put: false }"
                    :sort="false"
                    :clone="cloneType"
-                   ghost-class="ghost"
                    :list="types"
         >
             <type v-for="type in types" :type="type" :key="type.id"/>

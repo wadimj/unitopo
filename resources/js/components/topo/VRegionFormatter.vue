@@ -1,45 +1,60 @@
 <template>
     <div class="RegionFormatter">
-        <draggable :group="{ name: 'regions', pull: 'clone', put: false }" :sort="false">
-            <sui-breadcrumb icon="right angle" :sections="sections" />
-        </draggable>
+        <sui-label>
+            <i class="globe icon"></i>
+            <draggable :group="{ name: 'regions', pull: 'clone', put: false }"
+                       :sort="false"
+                       :clone="cloneRegion"
+                       draggable=".route-region"
+                       :list="regionsFiltered"
+                       class="draggable-regions"
+                       ghost-class="ghost"
+            >
+                <region v-for="region in regionsFiltered" :region="region" :key="region.id" class="route-region" draggable="true"/>
+            </draggable>
+        </sui-label>
     </div>
 </template>
 
 <script>
     import draggable from "../../libraries/vuedraggable.umd"
+    import region from "../topo/VRegion";
 
     export default {
         props: ['regions'],
         components: {
-            draggable
+            draggable,
+            region
         },
         computed: {
-            sections() {
-                let regions = this.regions.filter(x => x.parent_id !== null);
-
-                return regions.map(obj => {
-                    var rObj = {};
-                    rObj.key = obj.id;
-                    rObj.content = obj.name;
-                    rObj.link = true;
-                    return rObj;
-                });
+            regionsFiltered() {
+                return this.regions.filter(x => x.parent_id !== null);
             },
+        },
+        methods: {
+            cloneRegion(obj) {
+                window.console.log("CLONE_R");
+                window.console.log(obj);
+                return obj;
+            }
         }
     };
 </script>
 
-<style scoped>
+<style>
     .RegionFormatter{
         display: flex;
     }
-
-    .breadcrumb {
-        padding: .5833em .833em;
+    .draggable-regions{
+        display: inline;
     }
-
-    .ui.breadcrumb {
-        font-size: .85714286rem;
+    .RegionFormatter .globe.icon{
+        display: inline-block;
+    }
+    .RegionFormatter .route-region:last-child .right.icon{
+        display: none;
+    }
+    .ghost{
+        color: red;
     }
 </style>
