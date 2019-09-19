@@ -1,0 +1,5 @@
+@each $color-name, $color in $unitopo-colors {
+    .#{$color-name}.region-label {
+        color: $color;
+    }
+}

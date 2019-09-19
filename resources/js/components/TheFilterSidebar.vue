@@ -1,7 +1,7 @@
 <!--suppress ALL -->
 <template>
         <div class="ui sidebar vertical menu" id="filterSidebar">
-            <h4 class="ui top attached header">Tags</h4>
+            <h4 class="ui top attached header"><i class="tag icon"></i> Tags (AND)</h4>
             <draggable
                 class="dragArea ui attached segment"
                 group="types"
@@ -9,10 +9,10 @@
                 @add="add"
                 @change="log"
             >
-                <type v-for="tag in tags" :type="tag" :key="tag.id" :delete-btn="true" v-on:delete="removeTag"/>
+                <type v-for="tag in tags" :type="tag" :key="tag.id" :filter-mode="true" v-on:delete="removeTag"/>
             </draggable>
 
-            <h4 class="ui top attached header">Regions</h4>
+            <h4 class="ui top attached header"><i class="globe icon"></i> Regions (OR)</h4>
             <draggable
                 class="dragArea ui attached segment"
                 group="regions"
@@ -20,7 +20,7 @@
                 @add="add"
                 @change="log"
             >
-                <region v-for="region in regions" :region="region" :key="region.id" :filter-mode="true"/>
+                <region v-for="region in regions" :region="region" :key="region.id" :filter-mode="true" v-on:delete="removeRegion"/>
             </draggable>
         </div>
 </template>
@@ -76,6 +76,13 @@
                 console.log("DELETE");
                 console.log(key);
                 store.dispatch('filters/removeTag', key);
+
+                $('[data-toggle="tooltip"]').tooltip('hide');
+            },
+            removeRegion(key) {
+                console.log("DELETE R");
+                console.log(key);
+                store.dispatch('filters/removeRegion', key);
 
                 $('[data-toggle="tooltip"]').tooltip('hide');
             },

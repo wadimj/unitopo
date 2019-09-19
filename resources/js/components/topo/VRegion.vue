@@ -1,11 +1,11 @@
 <template>
-    <sui-label v-if="filterMode" data-toggle="tooltip" :title="region.dsc" class="route-region">
+    <sui-label v-if="filterMode" data-toggle="tooltip" :title="region.typeDsc + ' | ' + region.path">
         <i class="globe icon"></i>
-        {{ region.name }}
+        <span :class="region.color + ' region-label'">{{ region.name }}</span>
         <i class="close icon"
            :data-index="region.id" data-role="remove-filter" v-on:click="deleteRegion"></i>
     </sui-label>
-    <span v-else>
+    <span v-else data-toggle="tooltip" :title="region.typeDsc" :class="region.color + ' region-label'">
         {{ region.name }}
         <i class="right angle icon"></i>
     </span>

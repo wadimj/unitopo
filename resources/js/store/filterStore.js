@@ -37,6 +37,27 @@ export default {
             });
         },
         UPDATE_REGIONS: (state, payload) => {
+            //Remove duplicates
+            payload.find(function(element, index, array){
+                if(typeof element === 'undefined'){
+                    return;
+                }
+
+                let key = element.id;
+                let currIndex = index;
+
+                payload.find(function(element, index, array){
+                    if(typeof element === 'undefined'){
+                        return;
+                    }
+
+                    if(element.id === key && index !== currIndex){
+                        array.splice(index, 1);
+                        //todo notify about duplicate
+                    }
+                });
+            });
+
             state.regions = payload;
         },
         REMOVE_REGION: (state, key) => {
