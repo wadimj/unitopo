@@ -1,12 +1,11 @@
 <template>
-    <div class="GradeFormatter">
-        <draggable :group="{ name: 'types', pull: 'clone', put: false }"
-                   :sort="false"
-                   :list="gradesConverted"
-        >
-            <type v-for="grade in gradesConverted" :type="grade" :key="grade.id"/>
-        </draggable>
-    </div>
+    <draggable :group="{ name: 'types', pull: 'clone', put: false }"
+               :sort="false"
+               :list="gradesConverted"
+               class="GradeFormatter"
+    >
+        <type v-for="grade in gradesConverted" :type="grade" :key="grade.id"/>
+    </draggable>
 </template>
 
 <script>

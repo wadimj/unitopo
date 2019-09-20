@@ -57,7 +57,6 @@
         mounted() {
             $('#filterSidebar')
                 .sidebar({
-                    //context: '.main',
                     closable: false,
                     dimPage: false,
                     transition: 'overlay'

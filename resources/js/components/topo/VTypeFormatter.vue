@@ -1,13 +1,12 @@
 <template>
-    <div class="TypeFormatter">
-        <draggable :group="{ name: 'types', pull: 'clone', put: false }"
-                   :sort="false"
-                   :clone="cloneType"
-                   :list="types"
-        >
-            <type v-for="type in types" :type="type" :key="type.id"/>
-        </draggable>
-    </div>
+    <draggable :group="{ name: 'types', pull: 'clone', put: false }"
+               :sort="false"
+               :clone="cloneType"
+               :list="types"
+               class="TypeFormatter"
+    >
+        <type v-for="type in types" :type="type" :key="type.id"/>
+    </draggable>
 </template>
 
 <script>

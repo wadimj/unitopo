@@ -62,7 +62,7 @@ export default {
         },
         REMOVE_REGION: (state, key) => {
             state.regions.find(function(element, index, array){
-                if(typeof element !== 'undefined' && element.k === key){
+                if(typeof element !== 'undefined' && element.id === key){
                     array.splice(index, 1);
                 }
             });
