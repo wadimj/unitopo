@@ -26,6 +26,10 @@ Route::get('users/{user}', function (App\Models\User $user) {
 Route::resource('players', 'Api\PlayerController');
 Route::resource('routes', 'Api\RouteController');
 
+Route::get('tags/compact', 'Api\TagController@compact');
+Route::get('tags/keys', 'Api\TagController@distinctKeys');
+Route::apiResource('tags', 'Api\TagController');
+
 
 Route::fallback(function(){
     return response()->json([

@@ -62,7 +62,6 @@ class RouteController extends Controller
     public function destroy(Route $route)
     {
         Route::destroy($route->id);
-
         return response()->json(null, 204);
     }
 }
