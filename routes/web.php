@@ -15,4 +15,4 @@ use Illuminate\Support\Facades\Route;
 
 //Route::get('/{any}', 'SpaController@index')->where('any', '.*');
 
-Route::get('/{catchall?}', 'SpaController@index')->where('catchall', '^(?!api).*$')->name('administration');
+Route::get('/{catchall?}', 'SpaController@index')->where('catchall', '^(?!api).*$')->name('spa');

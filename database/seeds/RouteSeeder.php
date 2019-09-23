@@ -38,6 +38,9 @@ class RouteSeeder extends Seeder
             }
             $route->tags()->saveMany($tags);
 
+            $fototopos = \App\Models\Geometry\Fototopo::orderByRaw('RAND()')->take(random_int(0,2))->get();
+            $route->fototopos()->saveMany($fototopos);
+
             factory(App\Models\Content\Article::class, 1)->create([
                 'section_type' => \App\Models\Topo\Route::class,
                 'section_id' => $route->id

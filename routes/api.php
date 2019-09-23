@@ -30,6 +30,8 @@ Route::get('tags/compact', 'Api\TagController@compact');
 Route::get('tags/keys', 'Api\TagController@distinctKeys');
 Route::apiResource('tags', 'Api\TagController');
 
+Route::apiResource('fototopos', 'Api\FototopoController');
+
 
 Route::fallback(function(){
     return response()->json([

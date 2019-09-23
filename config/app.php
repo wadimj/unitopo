@@ -52,7 +52,7 @@ return [
     |
     */
 
-    'url' => env('APP_URL', 'http://unitopo.local'),
+    'url' => env('APP_URL', 'http://unitopo.local:82'),
 
     'asset_url' => env('ASSET_URL', null),
 

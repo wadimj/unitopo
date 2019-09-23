@@ -3,6 +3,7 @@
 namespace App\Models\Topo;
 
 use App\Models\Content\Article;
+use App\Models\Geometry\Fototopo;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use OwenIt\Auditing\Contracts\Auditable;
@@ -45,14 +46,19 @@ class Route extends Model implements Auditable
     protected $fillable = ['name', 'description', 'type_id', 'region_id'];
 
     public function tags()
-    {
-       return $this->belongsToMany(Tag::class)
+    {       return $this->belongsToMany(Tag::class)
            ->withTimestamps();
     }
 
     public function grades()
     {
         return $this->belongsToMany(Grade::class)
+            ->withTimestamps();
+    }
+
+    public function fototopos()
+    {
+        return $this->belongsToMany(Fototopo::class)
             ->withTimestamps();
     }
 
