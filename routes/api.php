@@ -32,6 +32,12 @@ Route::apiResource('tags', 'Api\TagController');
 
 Route::apiResource('fototopos', 'Api\FototopoController');
 
+Route::get('geography/tags', 'Api\GeographyController@tags');
+Route::get('geography/places', 'Api\GeographyController@places');
+Route::get('geography/ways', 'Api\GeographyController@ways');
+Route::get('geography/polygons', 'Api\GeographyController@polygons');
+Route::apiResource('geography', 'Api\GeographyController');
+
 
 Route::fallback(function(){
     return response()->json([
