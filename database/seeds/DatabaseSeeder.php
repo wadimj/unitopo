@@ -16,6 +16,7 @@ class DatabaseSeeder extends Seeder
             RegionSeeder::class,
             GradeSeeder::class,
             TagSeeder::class,
+            GeographySeeder::class,
             FototopoSeeder::class,
             RouteSeeder::class,
         ]);

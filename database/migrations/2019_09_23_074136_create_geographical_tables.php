@@ -14,27 +14,36 @@ class CreateGeographicalTables extends Migration
     public function up()
     {
         Schema::create('geog_place', function (Blueprint $table) {
+            $table->increments('id');
             $table->uuid('uuid');
             $table->string('name');
             $table->point('geo');
             $table->softDeletes();
             $table->timestamps();
+
+            //$table->primary('uuid');
         });
 
         Schema::create('geog_way', function (Blueprint $table) {
+            $table->increments('id');
             $table->uuid('uuid');
             $table->string('name');
-            $table->multiLineString('geo');
+            $table->lineString('geo');
             $table->softDeletes();
             $table->timestamps();
+
+            //$table->primary('uuid');
         });
 
         Schema::create('geog_polygon', function (Blueprint $table) {
+            $table->increments('id');
             $table->uuid('uuid');
             $table->string('name');
-            $table->point('geo');
+            $table->polygon('geo');
             $table->softDeletes();
             $table->timestamps();
+
+            //$table->primary('uuid');
         });
     }
 

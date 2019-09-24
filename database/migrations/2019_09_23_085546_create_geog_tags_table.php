@@ -17,9 +17,21 @@ class CreateGeogTagsTable extends Migration
             $table->increments('id');
             $table->string('k');
             $table->string('v');
-            $table->morphs('geogtag');
             $table->softDeletes();
             $table->timestamps();
+        });
+
+        Schema::create('geog_taggables', function (Blueprint $table){
+            $table->increments('id');
+            $table->integer('geog_tag_id')->unsigned()->nullable();
+            $table->morphs('geog_taggable');
+            //$table->string('geog_taggable_type');
+            //$table->uuid('geog_taggable_uuid');
+            $table->softDeletes();
+            $table->timestamps();
+
+            $table->foreign('geog_tag_id')->references('id')
+                ->on('geog_tags')->onDelete('cascade');
         });
     }
 
@@ -30,6 +42,7 @@ class CreateGeogTagsTable extends Migration
      */
     public function down()
     {
+        Schema::dropIfExists('geog_taggables');
         Schema::dropIfExists('geog_tags');
     }
 }

@@ -11,7 +11,7 @@ class RouteSeeder extends Seeder
      */
     public function run()
     {
-        factory(App\Models\Topo\Route::class, 60)->create()->each(function ($route) {
+        factory(App\Models\Topo\Route::class, 30)->create()->each(function ($route) {
             $grades = [];
             $grades[] = \App\Models\Topo\Grade::orderByRaw('RAND()')->where('scale_id', '=', 1)->take(1)->get()[0];
             $grades[] = \App\Models\Topo\Grade::orderByRaw('RAND()')->where('scale_id', '=', 2)->take(1)->get()[0];

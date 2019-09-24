@@ -18,6 +18,6 @@ class Way extends Model
 
     public function geogTags()
     {
-        return $this->morphMany(GeogTag::class, 'geogtag');
+        return $this->morphToMany(GeogTag::class, 'geog_taggable');
     }
 }
