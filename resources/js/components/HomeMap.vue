@@ -1,48 +1,77 @@
 <template>
     <div>
-        <vl-map :load-tiles-while-animating="true" :load-tiles-while-interacting="true"
-                data-projection="EPSG:4326" class="map">
-            <vl-view :zoom.sync="zoom" :center.sync="center" :rotation.sync="rotation"></vl-view>
-
-            <vl-geoloc @update:position="geolocPosition = $event">
-                <template slot-scope="geoloc">
-                    <vl-feature v-if="geoloc.position" id="position-feature">
-                        <vl-geom-point :coordinates="geoloc.position"></vl-geom-point>
-                        <vl-style-box>
-                            <vl-style-icon src="_media/marker.png" :scale="0.4" :anchor="[0.5, 1]"></vl-style-icon>
-                        </vl-style-box>
-                    </vl-feature>
-                </template>
-            </vl-geoloc>
-
-            <vl-layer-tile id="osm">
-                <vl-source-osm></vl-source-osm>
-            </vl-layer-tile>
-        </vl-map>
+        <div id="map-container"></div>
     </div>
 </template>
 
 <script>
-    import Vue from 'vue';
-    import VueLayers from 'vuelayers';
-    import 'vuelayers/lib/style.css'; // needs css-loader
+    import 'ol/ol.css';
+    import GeoJSON from 'ol/format/GeoJSON';
+    import Map from 'ol/Map';
+    import VectorLayer from 'ol/layer/Vector';
+    import VectorSource from 'ol/source/Vector';
+    import View from 'ol/View';
+    import TileLayer from 'ol/layer/Tile';
+    import XYZSource from 'ol/source/XYZ';
+    import {bbox} from 'ol/loadingstrategy';
 
-    Vue.use(VueLayers);
+    let vectorSource = new VectorSource({
+            format: new GeoJSON(),
+            loader: function (extent, resolution, projection) {
+                var proj = projection.getCode();
+                var url = 'http://unitopo.local:82/api/gis/poi';
+                var xhr = new XMLHttpRequest();
+                xhr.open('GET', url);
+                var onError = function () {
+                    vectorSource.removeLoadedExtent(extent);
+                };
+                xhr.onerror = onError;
+                xhr.onload = function () {
+                    if (xhr.status === 200) {
+                        vectorSource.addFeatures(
+                            vectorSource.getFormat().readFeatures(xhr.responseText));
+                    } else {
+                        onError();
+                    }
+                };
+                xhr.send();
+            },
+            strategy: bbox
+        });
 
     export default {
-        data () {
-            return {
-                zoom: 2,
-                center: [0, 0],
-                rotation: 0,
-                geolocPosition: undefined,
-            }
+        mounted() {
+            this.$nextTick(function () {
+                initMap();
+            })
         }
+    }
+    function initMap() {
+        var myMap = new Map({
+            target: 'map-container',
+            layers: [
+                new TileLayer({
+                    source: new XYZSource({
+                        url: 'http://tile.thunderforest.com/outdoors/{z}/{x}/{y}.png?apikey=0509574ee01f4147a6d1078fc6a10ca2'
+                    })
+                }),
+                new VectorLayer({
+                    source: new VectorSource({
+                        format: new GeoJSON(),
+                        url: 'http://unitopo.local:82/api/gis/poi'
+                    })
+                })
+            ],
+            view: new View({
+                center: [0, 0],
+                zoom: 2
+            })
+        });
     }
 </script>
 
 <style>
-    .map{
+    #map-container{
         position: absolute;
         width: 100%;
         height: calc(100% - 40px);

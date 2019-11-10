@@ -38,6 +38,8 @@ Route::get('geography/ways', 'Api\GeographyController@ways');
 Route::get('geography/polygons', 'Api\GeographyController@polygons');
 Route::apiResource('geography', 'Api\GeographyController');
 
+Route::get('gis/poi', 'Api\GISController@poi');
+Route::apiResource('gis', 'Api\GISController');
 
 Route::fallback(function(){
     return response()->json([

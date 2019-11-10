@@ -18,10 +18,17 @@ class CreateRegionsTable extends Migration
             $table->string('type')->default(\App\Models\Topo\Region::TYPE_REGION);
             $table->string('name');
             $table->text('description')->nullable();
-            $table->string('union_id')->nullable();
+            $table->integer('is_polygon')->unsigned()->nullable();
+            $table->integer('geog_collection_tag_id')->unsigned()->nullable();
             $table->nestedSet();
             $table->softDeletes();
             $table->timestamps();
+
+            $table->foreign('geog_collection_tag_id')->references('id')
+                ->on('geog_tags')->onDelete('cascade');
+
+            $table->foreign('is_polygon')->references('id')
+                ->on('geog_polygon')->onDelete('cascade');
         });
     }
 

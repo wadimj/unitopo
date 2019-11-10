@@ -18,11 +18,15 @@ class CreateRoutesTable extends Migration
             $table->text('name');
             $table->text('description')->nullable();
             $table->integer('region_id')->unsigned()->nullable();
+            $table->integer('geog_collection_tag_id')->unsigned()->nullable();
             $table->softDeletes();
             $table->timestamps();
 
             $table->foreign('region_id')->references('id')
                 ->on('regions')->onDelete('cascade');
+
+            $table->foreign('geog_collection_tag_id')->references('id')
+                ->on('geog_tags')->onDelete('cascade');
         });
     }
 
