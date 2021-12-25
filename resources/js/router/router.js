@@ -2,6 +2,7 @@ import Vue from 'vue';
 import VueRouter from 'vue-router';
 import HomeMap from "../components/HomeMap";
 import ExampleComponent from "../components/ExampleComponent";
+import Panorama from "../components/Panorama";
 import RouteIndex from "../components/RouteIndex";
 import RouteView from "../components/topo/RouteView";
 import TestDraggable from "../components/TestDraggable"
@@ -37,6 +38,11 @@ export default new VueRouter({
             path: '/drag',
             name: 'route.drag',
             component: TestDraggable,
+        },
+        {
+            path: '/panorama',
+            name: 'panorama',
+            component: Panorama,
         },
         {
             path: '*',

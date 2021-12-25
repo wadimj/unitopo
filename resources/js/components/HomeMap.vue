@@ -5,21 +5,21 @@
 </template>
 
 <script>
-    import 'ol/ol.css';
-    import GeoJSON from 'ol/format/GeoJSON';
-    import Map from 'ol/Map';
-    import VectorLayer from 'ol/layer/Vector';
-    import VectorSource from 'ol/source/Vector';
-    import View from 'ol/View';
-    import TileLayer from 'ol/layer/Tile';
-    import XYZSource from 'ol/source/XYZ';
-    import {bbox} from 'ol/loadingstrategy';
+import 'ol/ol.css';
+import GeoJSON from 'ol/format/GeoJSON';
+import Map from 'ol/Map';
+import VectorLayer from 'ol/layer/Vector';
+import VectorSource from 'ol/source/Vector';
+import View from 'ol/View';
+import TileLayer from 'ol/layer/Tile';
+import XYZSource from 'ol/source/XYZ';
+import {bbox} from 'ol/loadingstrategy';
 
-    let vectorSource = new VectorSource({
+let vectorSource = new VectorSource({
             format: new GeoJSON(),
-            loader: function (extent, resolution, projection) {
+            loader: function (extent, resolution, projection) {tm
                 var proj = projection.getCode();
-                var url = 'http://unitopo.local:82/api/gis/poi';
+                var url = 'http://unitopo.local/api/gis/poi';
                 var xhr = new XMLHttpRequest();
                 xhr.open('GET', url);
                 var onError = function () {
@@ -58,7 +58,7 @@
                 new VectorLayer({
                     source: new VectorSource({
                         format: new GeoJSON(),
-                        url: 'http://unitopo.local:82/api/gis/poi'
+                        url: 'http://unitopo.local/api/gis/poi'
                     })
                 })
             ],

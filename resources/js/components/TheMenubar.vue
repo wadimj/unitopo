@@ -23,6 +23,10 @@
                     Hello World
                 </router-link>
 
+                <router-link :to="{ name: 'panorama' }" is="sui-menu-item" class="header">
+                    Panorama
+                </router-link>
+
                 <router-link is="sui-menu-item" :to="{ name: 'route.drag' }" >Drag</router-link>
 
                 <sui-dropdown text="Dropdown" item class="simple">
